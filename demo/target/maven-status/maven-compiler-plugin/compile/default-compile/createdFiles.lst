@@ -1,0 +1,8 @@
+com/example/demo/DemoApplication.class
+com/example/demo/controller/HelloController.class
+com/example/demo/model/Cargo.class
+com/example/demo/model/CargoEntity.class
+com/example/demo/service/HelloService.class
+com/example/demo/controller/CargoEntityController.class
+com/example/demo/model/FlightEntity.class
+com/example/demo/model/Baggage.class
