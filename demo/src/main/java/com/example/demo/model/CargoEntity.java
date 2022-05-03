@@ -14,12 +14,12 @@ import java.util.List;
 @Setter
 public class CargoEntity {
     @Id
-    @Column(name="flightId")
+    @Column(name="flight_id")
     private Long flightId;
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="flightId",referencedColumnName = "flightId",updatable = false, insertable = false)
+    @JoinColumn(name="flight_Id",referencedColumnName = "flight_id",updatable = false, insertable = false)
     private List<Baggage> baggage = new ArrayList<>();
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="flightId",referencedColumnName = "flightId")
+    @JoinColumn(name="flight_Id",referencedColumnName = "flight_id")
     private List<Cargo> cargo = new ArrayList<>();
 }
