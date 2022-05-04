@@ -22,6 +22,17 @@ public class CargoEntityController {
     @GetMapping("/Weight/{id}")
     private String getWeight(@PathVariable long id){
         return  cargoEntityService.getWeight(id);
+    }
 
+    //Error
+    @GetMapping("/Weight/ByDate")
+    private String getWeightByDate(){
+        String a="2018-04-24T06:33:35 -02:00";
+        return  cargoEntityService.getWeightByDate(a);
+    }
+
+    @GetMapping("/IATA/{IATA}")
+    private String getIATA(@PathVariable String IATA){
+        return  cargoEntityService.GetIATA(IATA);
     }
 }
