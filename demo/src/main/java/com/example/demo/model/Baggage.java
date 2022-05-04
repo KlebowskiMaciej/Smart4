@@ -17,6 +17,7 @@ public class Baggage {
     private Long weight;
     private String weightUnit;
     private Long pieces;
+
 }
 
 

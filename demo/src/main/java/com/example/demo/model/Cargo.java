@@ -16,4 +16,5 @@ public class Cargo {
     private Long weight;
     private String weightUnit;
     private Long pieces;
+
 }

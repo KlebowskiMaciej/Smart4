@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import com.example.demo.model.Baggage;
+import com.example.demo.model.Cargo;
 import com.example.demo.model.CargoEntity;
 import com.example.demo.repository.BaggageRepository;
 import com.example.demo.repository.CargoEntityRepository;
@@ -8,7 +10,9 @@ import com.example.demo.repository.FlightEntityRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /*
 W przypadku żądanego numeru lotu i daty poda następujące informacje:
@@ -38,10 +42,58 @@ public class CargoEntityService {
         return cargoEntityRepository.findAll();
     }
 
-    public String getWeight()
-    {
 
-        return "work";
+    public String getWeight(Long id)
+    {
+        long CargoW=0;
+        long CargoP=0;
+        long BaggageW=0;
+        long BaggageP=0;
+        long CargoS=0;
+        long BaggageS=0;
+        List<CargoEntity> cargoEntities = cargoEntityRepository.findAll();
+        List<Cargo> cargos = new ArrayList<>();
+        List<Baggage>baggages =new ArrayList<>();
+
+        for(CargoEntity root:cargoEntities)
+        {
+            if(root.getFlightId()==id)
+            {
+                cargos = root.getCargo();
+                baggages =root.getBaggage();
+            }
+        }
+        for (Cargo cargo : cargos) {
+            if(cargo.getWeightUnit()=="lb")
+                CargoW+=cargo.getWeight();
+            else
+                CargoW+=2.20462262*cargo.getWeight();
+            CargoP+=cargo.getPieces();
+        }
+        for(Baggage baggage:baggages)
+        {
+            if(baggage.getWeightUnit()=="lb")
+                BaggageW+=baggage.getWeight();
+            else
+                BaggageW+=2.20462262*baggage.getWeight();
+
+            BaggageP+= baggage.getPieces();
+        }
+
+        CargoS=CargoP*CargoW;
+        BaggageS=BaggageW*BaggageP;
+
+        return "Cargo Weight for requested Flight: "+Long.toString(CargoS)+" [lb]\n"
+                +"Baggage Weight for requested Flight: "+Long.toString(BaggageS)+" [lb]\n"
+                +"Total Weight for requested Flight: "+Long.toString(BaggageS+CargoS)+" [lb]\n";
+
+    }
+
+    public String getWeightByDate(String date)
+    {
+        long id=0;
+
+        return getWeight(id);
     }
 
 }
