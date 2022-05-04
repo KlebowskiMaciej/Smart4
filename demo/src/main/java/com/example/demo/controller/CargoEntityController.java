@@ -19,6 +19,11 @@ public class CargoEntityController {
         return  cargoEntityService.getCargoEntity();
 
     }
+    @GetMapping("/Cargo")
+    private String getWeight(){
+        return  cargoEntityService.getWeight();
+
+    }
     @GetMapping("/CargoEntity/{flight_id}")
     private CargoEntity getSingleCargoEntity(@PathVariable Long flight_id){
         throw new IllegalArgumentException("Not implemented yet!");

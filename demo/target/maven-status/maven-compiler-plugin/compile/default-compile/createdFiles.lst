@@ -2,7 +2,6 @@ com/example/demo/repository/CargoEntityRepository.class
 com/example/demo/repository/BaggageRepository.class
 com/example/demo/model/Cargo.class
 com/example/demo/model/CargoEntity.class
-com/example/demo/service/FlightEntityService.class
 com/example/demo/controller/CargoEntityController.class
 com/example/demo/repository/FlightEntityRepository.class
 com/example/demo/DemoApplication.class
