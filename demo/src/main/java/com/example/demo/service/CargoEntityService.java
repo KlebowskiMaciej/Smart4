@@ -20,11 +20,6 @@ public class CargoEntityService {
     private final CargoEntityRepository cargoEntityRepository;
     private final FlightEntityRepository flightEntityRepository;
 
-
-    public List<CargoEntity> getCargoEntity(){
-
-        return cargoEntityRepository.findAll();
-    }
     private ArrayList<Long> WeightList(Long id){
         long CargoW=0;
         long CargoP=0;
@@ -72,9 +67,23 @@ public class CargoEntityService {
         return answer;
     }
 
-    public String getWeight(Long id)
+    public String getByFlightNumber(Long FlightNumber)
     {
-       ArrayList<Long> Weight=WeightList(id);
+       boolean exist=false;
+        ArrayList<Long> Weight = new ArrayList<>();
+        List<FlightEntity>flightEntityList = flightEntityRepository.findAll();
+            for(FlightEntity flightEntity:flightEntityList)
+            {
+                Long id=flightEntity.getFlightNumber();
+                if(id.equals(FlightNumber)) {
+                    id = flightEntity.getFlightId();
+                    Weight=WeightList(id);
+                    exist=true;
+                    break;
+                }
+            }
+        if(!exist)
+            return "There is no flight with this FlightNumber!";
 
         return "Cargo Weight for requested Flight: "+Long.toString(Weight.get(0))+" [lb]\n"
                 +"Baggage Weight for requested Flight: "+Long.toString(Weight.get(1))+" [lb]\n"
@@ -82,22 +91,7 @@ public class CargoEntityService {
 
     }
 
-    public String getWeightByDate(String date)
-    {
-        long id=0;
-        List<FlightEntity>flightEntityList = flightEntityRepository.findAll();
-        for(FlightEntity flightEntity:flightEntityList)
-        {
-            String s=flightEntity.getDepartureDate();
-            if(s.equals(date))
-                id=flightEntity.getFlightId();
-            else
-                return "No data available";
-        }
-        return getWeight(id);
-    }
-
-    public String GetIATA(String IATA)
+    public String getByIATA(String IATA)
     {
         List<FlightEntity>flightEntityList = flightEntityRepository.findAll();
         String sum="";
@@ -106,20 +100,26 @@ public class CargoEntityService {
         long id=0;
         long flightDeparting=0;
         long flightArriving=0;
+        boolean exist=false;
         for(FlightEntity flightEntity:flightEntityList) {
             sum = flightEntity.getArrivalAirportIATACode().toString();
             if (sum.equals(IATA)) {
                 flightArriving += 1;
                 id= flightEntity.getFlightId();
                 TotalA+=WeightList(id).get(1);
+                exist=true;
             }
             sum=flightEntity.getDepartureAirportIATACode();
             if(sum.equals(IATA)) {
                 flightDeparting += 1;
                 id= flightEntity.getFlightId();
                 TotalD+=WeightList(id).get(1);
+                exist=true;
             }
         }
+        if(!exist)
+            return "There is no flight with this IATA!";
+
         return "Number of flights departing from this airport: "+flightDeparting+" Total number (pieces) of baggage departing from this airport: "+TotalD+" [lb] \n"
                 +"Number of flights arriving to this airport: "+flightArriving+" Total number (pieces) of baggage arriving to this airport: "+TotalA+" [lb] \n";
     }
