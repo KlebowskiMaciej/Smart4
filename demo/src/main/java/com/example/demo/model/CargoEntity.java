@@ -13,6 +13,9 @@ import java.util.List;
 @Getter
 @Setter
 public class CargoEntity {
+    /**
+     * Model class
+     */
     @Id
     @Column(name="flight_id")
     private Long flightId;

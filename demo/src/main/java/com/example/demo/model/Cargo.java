@@ -10,7 +10,9 @@ import javax.persistence.Id;
 @Getter
 @Setter
 public class Cargo {
-
+    /**
+     * Model class
+     */
     @Id
     private Long id;
     private Long weight;

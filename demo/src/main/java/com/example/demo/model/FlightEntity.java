@@ -11,6 +11,9 @@ import javax.persistence.Id;
 @Getter
 @Setter
 public class FlightEntity {
+    /**
+     * Model class
+     */
     @Id
     private Long flightId;
     private Long flightNumber;
