@@ -14,13 +14,13 @@ public class CargoEntityController {
 
     private final CargoEntityService cargoEntityService;
 
-    @GetMapping("/FlightNumber/{flightNumber}")
-    private String getWeight(@PathVariable long flightNumber){
-        return  cargoEntityService.getByFlightNumber(flightNumber);
+    @GetMapping("/FlightNumber/{FlightNumber}")
+    private String GetWeight(@PathVariable long FlightNumber){
+        return  cargoEntityService.GetByFlightNumber(FlightNumber);
     }
 
     @GetMapping("/IATA/{IATA}")
-    private String getIATA(@PathVariable String IATA){
-        return  cargoEntityService.getByIATA(IATA);
+    private String GetIATA(@PathVariable String IATA){
+        return  cargoEntityService.GetByIATA(IATA);
     }
 }

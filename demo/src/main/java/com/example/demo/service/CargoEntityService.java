@@ -67,7 +67,7 @@ public class CargoEntityService {
         return answer;
     }
 
-    public String getByFlightNumber(Long FlightNumber)
+    public String GetByFlightNumber(Long FlightNumber)
     {
        boolean exist=false;
         ArrayList<Long> Weight = new ArrayList<>();
@@ -91,7 +91,7 @@ public class CargoEntityService {
 
     }
 
-    public String getByIATA(String IATA)
+    public String GetByIATA(String IATA)
     {
         List<FlightEntity>flightEntityList = flightEntityRepository.findAll();
         String sum="";
@@ -123,5 +123,4 @@ public class CargoEntityService {
         return "Number of flights departing from this airport: "+flightDeparting+" Total number (pieces) of baggage departing from this airport: "+TotalD+" [lb] \n"
                 +"Number of flights arriving to this airport: "+flightArriving+" Total number (pieces) of baggage arriving to this airport: "+TotalA+" [lb] \n";
     }
-
 }
